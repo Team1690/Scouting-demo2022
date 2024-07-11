@@ -1,44 +1,42 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import "package:orbit_standard_library/orbit_standard_library.dart";
+import "package:scouting_frontend/models/enums/climb_enum.dart";
 import "package:scouting_frontend/models/enums/drive_motor_enum.dart";
 import "package:scouting_frontend/models/enums/drive_train_enum.dart";
-import "package:scouting_frontend/models/enums/shooting_range_enum.dart";
 import "package:scouting_frontend/models/providers/id_providers.dart";
 import "package:scouting_frontend/views/mobile/hasura_vars.dart";
 
-class PitVars implements HasuraVars {
-  PitVars(final BuildContext context)
-      : driveTrainType = null,
+class PitVars implements HasuraVars{
+  PitVars(final BuildContext context):
+        driveTrainType = null, 
         driveMotorType = null,
         notes = "",
         teamId = null,
         weight = null,
-        harmony = false,
-        trap = false,
         url = null,
-        canEject = false,
-        canPassUnderStage = false,
+        canReachUpper = false,
+        canReachLower = false,
         length = null,
         width = null,
-        allRangeShooting = null,
-        climb = false;
+        canStore = null,
+        farShooting = false,
+        climbType = null;
 
   PitVars.all({
-    required this.driveTrainType,
-    required this.driveMotorType,
-    required this.notes,
-    required this.teamId,
-    required this.weight,
-    required this.harmony,
-    required this.trap,
-    required this.canPassUnderStage,
-    required this.url,
-    required this.canEject,
-    required this.length,
-    required this.width,
-    required this.allRangeShooting,
-    required this.climb,
+        required this.length,
+        required this.width,
+        required this.driveTrainType,
+        required this.driveMotorType,
+        required this.notes,
+        required this.weight,
+        required this.url,
+        required this.canReachUpper,
+        required this.canReachLower,
+        required this.teamId,
+        required this.canStore,
+        required this.farShooting,
+        required this.climbType,
   });
 
   PitVars copyWith({
@@ -49,13 +47,13 @@ class PitVars implements HasuraVars {
     final double? Function()? weight,
     final double? Function()? length,
     final double? Function()? width,
-    final bool Function()? harmony,
-    final bool Function()? trap,
     final String? Function()? url,
-    final bool Function()? canEject,
-    final bool Function()? canPassUnderStage,
-    final ShootingRange? Function()? allRangeShooting,
-    final bool Function()? climb,
+    final bool? Function()? canReachUpper,
+    final bool? Function()? canReachLower,
+    final int? Function()? canStore,
+    final bool? Function()? farShooting,
+    final Climb? Function()? climbType,
+
   }) =>
       PitVars.all(
         driveTrainType:
@@ -67,17 +65,13 @@ class PitVars implements HasuraVars {
         weight: weight != null ? weight() : this.weight,
         length: length != null ? length() : this.length,
         width: width != null ? width() : this.width,
-        harmony: harmony != null ? harmony() : this.harmony,
-        trap: trap != null ? trap() : this.trap,
         url: url != null ? url() : this.url,
-        canEject: canEject != null ? canEject() : this.canEject,
-        canPassUnderStage: canPassUnderStage != null
-            ? canPassUnderStage()
-            : this.canPassUnderStage,
-        allRangeShooting: allRangeShooting != null
-            ? allRangeShooting()
-            : this.allRangeShooting,
-        climb: climb != null ? climb() : this.climb,
+        canReachUpper: canReachUpper != null ? canReachUpper() : this.canReachUpper,
+        canReachLower: canReachLower != null ? canReachLower() : this.canReachLower,
+        canStore: canStore != null ? canStore() : this.canStore,
+        farShooting: farShooting != null ? farShooting() : this.farShooting,
+        climbType: climbType != null ? climbType() : this.climbType,
+
       );
   final DriveTrain? driveTrainType;
   final DriveMotor? driveMotorType;
@@ -86,13 +80,13 @@ class PitVars implements HasuraVars {
   final double? weight;
   final double? length;
   final double? width;
-  final bool canPassUnderStage;
-  final bool harmony;
-  final bool trap;
+  final bool? canReachUpper;
+  final bool? canReachLower;
   final String? url;
-  final bool canEject;
-  final ShootingRange? allRangeShooting;
-  final bool climb;
+  final int? canStore;
+  final bool? farShooting;
+  final Climb? climbType;
+
   @override
   Map<String, dynamic> toJson(final BuildContext context) => <String, dynamic>{
         "drivetrain_id":
@@ -104,14 +98,12 @@ class PitVars implements HasuraVars {
         "weight": weight,
         "length": length,
         "width": width,
-        "harmony": harmony,
-        "trap": trap,
-        "can_pass_under_stage": canPassUnderStage,
         "url": url,
-        "can_eject": canEject,
-        "shooting_range_id":
-            IdProvider.of(context).shootingRange.enumToId[allRangeShooting],
-        "climb": climb,
+        "can_reach_upper": canReachUpper,
+        "can_reach_lower": canReachLower,
+        "can_climb_to_id": climbType,
+        "can_store": canStore,
+        "far_shooting": farShooting,
       };
 
   PitVars reset() => copyWith(
@@ -122,12 +114,11 @@ class PitVars implements HasuraVars {
         weight: always(null),
         length: always(null),
         width: always(null),
-        harmony: always(false),
-        trap: always(false),
-        canPassUnderStage: always(false),
         url: always(null),
-        canEject: always(false),
-        allRangeShooting: always(null),
-        climb: always(false),
+        canReachUpper: always(false),
+        canReachLower: always(false),
+        canStore: always(null),
+        farShooting: always(false),
+        climbType: always(null),
       );
 }
