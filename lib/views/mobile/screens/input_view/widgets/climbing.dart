@@ -51,8 +51,6 @@ class Climbing extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         children: <Widget>[
           ClimbingSelector(match: match, onNewMatch: onNewMatch),
-          if (match.climb == Climb.climbed)
-            HarmonyWith(match: match, onNewMatch: onNewMatch),
         ],
       );
 }

@@ -30,12 +30,12 @@ class _EditPitState extends State<EditPit> {
       weight: () => pit.weight,
       length: () => pit.length,
       width: () => pit.width,
-      harmony: () => pit.harmony,
-      trap: () => pit.trap,
       url: () => pit.url,
-      canEject: () => pit.canEject,
-      canPassUnderStage: () => pit.canPassUnderStage,
-      allRangeShooting: () => pit.allRangeShooting,
+      canReachLower: () => pit.canReachLower,
+      canReachUpper: () => pit.canReachUpper,
+      canStore: () => pit.canStore,
+      farShooting: () => pit.farShooting,
+      climbType: () => pit.climbType,
     );
 
     return vars;
