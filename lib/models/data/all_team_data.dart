@@ -1,4 +1,3 @@
-import "package:scouting_frontend/models/data/specific_match_data.dart";
 import "package:scouting_frontend/models/enums/climb_enum.dart";
 import "package:scouting_frontend/models/data/pit_data/pit_data.dart";
 import "package:scouting_frontend/models/data/technical_match_data.dart";
@@ -17,7 +16,6 @@ class AllTeamData {
     required this.taken,
     required this.aggregateData,
     required this.faultMessages,
-    required this.specificMatches,
   });
 
   //TODO: make const + add copywith
@@ -30,7 +28,6 @@ class AllTeamData {
   final PitData? pitData;
   final List<TechnicalMatchData> technicalMatches;
   final List<String> faultMessages;
-  final List<SpecificMatchData> specificMatches;
 
   int get brokenMatches => technicalMatches
       .where(
@@ -51,7 +48,10 @@ class AllTeamData {
               aggregateData.gamesPlayed);
   int get matchesClimbed => technicalMatches
       .where(
-        (final TechnicalMatchData element) => element.climb == Climb.climbed,
+        (final TechnicalMatchData element) =>
+            element.climb == Climb.climbOne ||
+            element.climb == Climb.climbThree ||
+            element.climb == Climb.climbTwo,
       )
       .length;
   double get climbPercentage =>
@@ -66,9 +66,6 @@ class AllTeamData {
                   (aggregateData.avgData.gamepieces +
                       aggregateData.avgData.totalMissed))
               .clamp(0, 1);
-  bool get harmony => technicalMatches
-      .where((final TechnicalMatchData element) => element.harmonyWith != 0)
-      .isNotEmpty;
   @override
   String toString() => "${team.name}  ${team.number}";
 }

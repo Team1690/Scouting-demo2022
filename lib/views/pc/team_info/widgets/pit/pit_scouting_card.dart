@@ -4,7 +4,6 @@ import "package:scouting_frontend/views/common/card.dart";
 import "package:scouting_frontend/views/constants.dart";
 import "package:scouting_frontend/views/pc/team_info/widgets/pit/edit_pit.dart";
 import "package:scouting_frontend/models/data/pit_data/pit_data.dart";
-import "package:scouting_frontend/views/pc/team_info/widgets/pit/robot_has_something.dart";
 
 class PitScoutingCard extends StatelessWidget {
   PitScoutingCard(
@@ -70,20 +69,20 @@ class PitScoutingCard extends StatelessWidget {
                 ),
                 const Divider(),
               ],
-              RobotHasSomething(title: "Trap", value: data.trap),
-              RobotHasSomething(title: "Harmony", value: data.harmony),
-              RobotHasSomething(title: "Can Eject", value: data.canEject),
-              RobotHasSomething(
-                title: "Can Pass Under Stage",
-                value: data.canPassUnderStage,
-              ),
-              RobotHasSomething(title: "Climb", value: data.climb),
+              // RobotHasSomething(title: "Trap", value: data.trap),
+              // RobotHasSomething(title: "Harmony", value: data.harmony),
+              // RobotHasSomething(title: "Can Eject", value: data.canEject),
+              // RobotHasSomething(
+              //   title: "Can Pass Under Stage",
+              //   value: data.canPassUnderStage,
+              // ),
+              // RobotHasSomething(title: "Climb", value: data.climb),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("Shooting Range: ${data.allRangeShooting.title}"),
+                    // Text("Shooting Range: ${data.allRangeShooting.title}"),
                     Text(
                       "Drivetrain: ${data.driveTrainType.title}",
                     ),

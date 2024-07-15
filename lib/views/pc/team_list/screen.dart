@@ -1,13 +1,10 @@
-import "package:collection/collection.dart";
 import "package:flutter/material.dart";
 import "package:scouting_frontend/models/data/all_team_data.dart";
-import "package:scouting_frontend/models/data/specific_match_data.dart";
 import "package:scouting_frontend/models/fetch_functions/fetch_all_teams.dart";
 import "package:scouting_frontend/views/common/card.dart";
 import "package:scouting_frontend/views/common/dashboard_scaffold.dart";
 import "package:scouting_frontend/views/constants.dart";
 import "package:orbit_standard_library/orbit_standard_library.dart";
-import "package:scouting_frontend/views/pc/team_info/widgets/specific/scouting_specific.dart";
 import "package:scouting_frontend/views/pc/team_list/aggregate_type.dart";
 import "package:scouting_frontend/views/pc/team_list/show.dart";
 
@@ -175,106 +172,14 @@ class TeamList extends StatelessWidget {
                                     (final AllTeamData team) =>
                                         team.climbPercentage,
                                   ),
-                                  boolColumn(
-                                    "Harmony",
-                                    (final AllTeamData team) => team.harmony,
-                                  ),
+                                  // boolColumn(
+                                  //   "Harmony",
+                                  //   (final AllTeamData team) => team.harmony,
+                                  // ),
                                   column(
                                     "Broken matches",
                                     (final AllTeamData team) =>
                                         team.brokenMatches,
-                                  ),
-
-                                  column(
-                                    "Speaker Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.speaker,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "Amp Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.amp,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "Climb Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.climb,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "Defense Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.defense,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "Drive Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.drivetrainAndDriving,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "Intake Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.intake,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
-                                  ),
-                                  column(
-                                    "General Rating",
-                                    (final AllTeamData p0) =>
-                                        p0.specificMatches
-                                            .map(
-                                              (final SpecificMatchData e) =>
-                                                  e.general,
-                                            )
-                                            .whereNotNull()
-                                            .toList()
-                                            .averageOrNull ??
-                                        double.nan,
                                   ),
                                 ],
                                 rows: <DataRow>[
@@ -363,136 +268,136 @@ class TeamList extends StatelessWidget {
                                               .climbingPoints,
                                         ].map(show),
                                         show(team.climbPercentage, true),
-                                        DataCell(
-                                          Text("${team.harmony}"),
-                                        ),
+                                        // DataCell(
+                                        //   Text("${team.harmony}"),
+                                        // ),
                                         show(team.brokenMatches),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.speaker,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.amp,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.climb,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.defense,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.drivetrainAndDriving,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.intake,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            getRating(
-                                              team.specificMatches
-                                                      .map(
-                                                        (
-                                                          final SpecificMatchData
-                                                              e,
-                                                        ) =>
-                                                            e.general,
-                                                      )
-                                                      .whereNotNull()
-                                                      .toList()
-                                                      .averageOrNull ??
-                                                  -1,
-                                            ).letter,
-                                          ),
-                                        ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.speaker,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.amp,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.climb,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.defense,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.drivetrainAndDriving,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.intake,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
+                                        // DataCell(
+                                        //   Text(
+                                        //     getRating(
+                                        //       team.specificMatches
+                                        //               .map(
+                                        //                 (
+                                        //                   final SpecificMatchData
+                                        //                       e,
+                                        //                 ) =>
+                                        //                     e.general,
+                                        //               )
+                                        //               .whereNotNull()
+                                        //               .toList()
+                                        //               .averageOrNull ??
+                                        //           -1,
+                                        //     ).letter,
+                                        //   ),
+                                        // ),
                                       ];
                                       return DataRow(
                                         cells: cells2,

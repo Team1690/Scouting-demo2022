@@ -3,14 +3,12 @@ import "package:graphql/client.dart";
 import "package:image_picker/image_picker.dart";
 import "package:scouting_frontend/models/enums/drive_motor_enum.dart";
 import "package:scouting_frontend/models/enums/drive_train_enum.dart";
-import "package:scouting_frontend/models/enums/shooting_range_enum.dart";
 import "package:orbit_standard_library/orbit_standard_library.dart";
 import "package:scouting_frontend/models/team_model.dart";
 import "package:scouting_frontend/net/hasura_helper.dart";
 import "package:scouting_frontend/views/constants.dart";
 import "package:scouting_frontend/views/mobile/image_picker_widget.dart";
 import "package:scouting_frontend/views/mobile/submit_buttons/submit/firebase_submit_button.dart";
-import "package:scouting_frontend/views/mobile/screens/pit_view/pit_toggle.dart";
 import "package:scouting_frontend/views/mobile/screens/pit_view/widgets/measurement_conversion.dart";
 import "package:scouting_frontend/views/mobile/screens/pit_view/pit_vars.dart";
 import "package:scouting_frontend/views/mobile/side_nav_bar.dart";
@@ -218,105 +216,105 @@ class _PitViewState extends State<PitView> {
                       icon: Icons.compare,
                     ),
                     SectionDivider(label: "OnStage"),
-                    Switcher(
-                      labels: <String>[
-                        ShootingRange.freeRange.title,
-                        ShootingRange.subwoofer.title,
-                      ],
-                      colors: const <Color>[
-                        Colors.white,
-                        Colors.white,
-                      ],
-                      onChange: (final int selection) {
-                        setState(() {
-                          vars = vars.copyWith(
-                            allRangeShooting: () => <int, ShootingRange>{
-                              0: ShootingRange.subwoofer,
-                              1: ShootingRange.freeRange,
-                            }[selection],
-                          );
-                        });
-                      },
-                      selected: vars.allRangeShooting.mapNullable(
-                            (final ShootingRange canAllRangeShoot) =>
-                                canAllRangeShoot.index == 1 ? 1 : 0,
-                          ) ??
-                          -1,
-                      borderRadiusGeometry: defaultBorderRadius,
-                    ),
+                    // Switcher(
+                    //   labels: <String>[
+                    //     ShootingRange.freeRange.title,
+                    //     ShootingRange.subwoofer.title,
+                    //   ],
+                    //   colors: const <Color>[
+                    //     Colors.white,
+                    //     Colors.white,
+                    //   ],
+                    //   onChange: (final int selection) {
+                    //     setState(() {
+                    //       vars = vars.copyWith(
+                    //         allRangeShooting: () => <int, ShootingRange>{
+                    //           0: ShootingRange.subwoofer,
+                    //           1: ShootingRange.freeRange,
+                    //         }[selection],
+                    //       );
+                    //     });
+                    //   },
+                    //   selected: vars.allRangeShooting.mapNullable(
+                    //         (final ShootingRange canAllRangeShoot) =>
+                    //             canAllRangeShoot.index == 1 ? 1 : 0,
+                    //       ) ??
+                    //       -1,
+                    //   borderRadiusGeometry: defaultBorderRadius,
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        PitToggle(
-                          onPressed: () => setState(() {
-                            final bool newClimb = !vars.climb;
-                            vars = vars.copyWith(
-                              climb: always(newClimb),
-                              harmony: always(false),
-                            );
-                          }),
-                          isSelected: vars.climb,
-                          title: "Climb",
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        if (vars.climb) ...<Widget>[
-                          PitToggle(
-                            onPressed: () => setState(() {
-                              vars = vars.copyWith(
-                                harmony: always(!vars.harmony),
-                              );
-                            }),
-                            isSelected: vars.harmony,
-                            title: "Can Harmonize",
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                        PitToggle(
-                          onPressed: () => setState(() {
-                            vars = vars.copyWith(
-                              canEject: always(!vars.canEject),
-                            );
-                          }),
-                          isSelected: vars.canEject,
-                          title: "Can Eject",
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        PitToggle(
-                          onPressed: () => setState(() {
-                            vars = vars.copyWith(
-                              canPassUnderStage:
-                                  always(!vars.canPassUnderStage),
-                            );
-                          }),
-                          isSelected: vars.canPassUnderStage,
-                          title: "Can Pass Under Stage",
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        PitToggle(
-                          onPressed: () => setState(() {
-                            vars = vars.copyWith(
-                              trap: always(!vars.trap),
-                            );
-                          }),
-                          isSelected: vars.trap,
-                          title: "Can Trap",
-                        ),
+                        //     PitToggle(
+                        //       onPressed: () => setState(() {
+                        //         final bool newClimb = !vars.climb;
+                        //         vars = vars.copyWith(
+                        //           climb: always(newClimb),
+                        //           harmony: always(false),
+                        //         );
+                        //       }),
+                        //       isSelected: vars.climb,
+                        //       title: "Climb",
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     if (vars.climb) ...<Widget>[
+                        //       PitToggle(
+                        //         onPressed: () => setState(() {
+                        //           vars = vars.copyWith(
+                        //             harmony: always(!vars.harmony),
+                        //           );
+                        //         }),
+                        //         isSelected: vars.harmony,
+                        //         title: "Can Harmonize",
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 10,
+                        //       ),
+                        //     ],
+                        //     PitToggle(
+                        //       onPressed: () => setState(() {
+                        //         vars = vars.copyWith(
+                        //           canEject: always(!vars.canEject),
+                        //         );
+                        //       }),
+                        //       isSelected: vars.canEject,
+                        //       title: "Can Eject",
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: <Widget>[
+                        //     PitToggle(
+                        //       onPressed: () => setState(() {
+                        //         vars = vars.copyWith(
+                        //           canPassUnderStage:
+                        //               always(!vars.canPassUnderStage),
+                        //         );
+                        //       }),
+                        //       isSelected: vars.canPassUnderStage,
+                        //       title: "Can Pass Under Stage",
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 20,
+                        //     ),
+                        //     PitToggle(
+                        //       onPressed: () => setState(() {
+                        //         vars = vars.copyWith(
+                        //           trap: always(!vars.trap),
+                        //         );
+                        //       }),
+                        //       isSelected: vars.trap,
+                        //       title: "Can Trap",
+                        //     ),
                       ],
                     ),
                     const SizedBox(

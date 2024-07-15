@@ -1,11 +1,9 @@
 import "package:collection/collection.dart";
 import "package:scouting_frontend/models/enums/climb_enum.dart";
-import "package:scouting_frontend/models/data/specific_match_data.dart";
 import "package:scouting_frontend/models/data/team_match_data.dart";
 import "package:scouting_frontend/models/data/technical_match_data.dart";
 import "package:scouting_frontend/models/team_model.dart";
 import "package:scouting_frontend/models/data/aggregate_data/aggregate_technical_data.dart";
-import "package:scouting_frontend/models/data/specific_summary_data.dart";
 import "package:scouting_frontend/models/data/pit_data/pit_data.dart";
 import "package:scouting_frontend/views/mobile/screens/fault_view/fault_entry.dart";
 
@@ -16,7 +14,6 @@ class TeamData {
     required this.lightTeam,
     required this.faultEntrys,
     required this.aggregateData,
-    required this.summaryData,
     required this.firstPicklistIndex,
     required this.secondPicklistIndex,
     required this.thirdPicklistIndex,
@@ -24,7 +21,6 @@ class TeamData {
   final List<FaultEntry> faultEntrys;
   final AggregateData aggregateData;
   final PitData? pitData;
-  final SpecificSummaryData? summaryData;
   final LightTeam lightTeam;
   final int firstPicklistIndex;
   final int secondPicklistIndex;
@@ -35,33 +31,32 @@ class TeamData {
       .map((final MatchData e) => e.technicalMatchData)
       .whereNotNull()
       .toList();
-  List<SpecificMatchData> get specificMatches => matches
-      .map((final MatchData e) => e.specificMatchData)
-      .whereNotNull()
-      .toList();
 
-  int get matchesClimbedSingle => technicalMatches
+  int get matchesClimbedFirst =>
+      technicalMatches // Counts all matches where robot climbed to X bar
+          .where(
+            (final TechnicalMatchData element) =>
+                (element.climb == Climb.climbOne),
+          )
+          .length;
+  int get matchesClimbedSecond => technicalMatches
       .where(
-        (final TechnicalMatchData element) =>
-            (element.climb == Climb.climbed) && element.harmonyWith == 0,
+        (final TechnicalMatchData element) => (element.climb == Climb.climbTwo),
       )
       .length;
-  int get matchesClimbedDouble => technicalMatches
+  int get matchesClimbedThird => technicalMatches
       .where(
         (final TechnicalMatchData element) =>
-            (element.climb == Climb.climbed) && element.harmonyWith == 1,
-      )
-      .length;
-  int get matchesClimbedTriple => technicalMatches
-      .where(
-        (final TechnicalMatchData element) =>
-            (element.climb == Climb.climbed) && element.harmonyWith == 2,
+            (element.climb == Climb.climbThree),
       )
       .length;
 
   int get matchesClimbed => technicalMatches
       .where(
-        (final TechnicalMatchData element) => (element.climb == Climb.climbed),
+        (final TechnicalMatchData element) =>
+            element.climb == Climb.climbOne ||
+            element.climb == Climb.climbTwo ||
+            element.climb == Climb.climbThree,
       )
       .length;
 

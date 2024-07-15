@@ -99,18 +99,18 @@ class QuickDataCard extends StatelessWidget {
                           Text(
                             "Climb Percentage: ${data.climbPercentage.isNaN ? "No Data" : data.climbPercentage.toStringAsFixed(1)}%",
                           ),
-                          Text(
-                            "Can Harmony: ${data.canHarmony ?? "No Data"}",
-                          ),
-                          Text(
-                            "Matches Climbed 1: ${data.matchesClimbedSingle}",
-                          ),
-                          Text(
-                            "Matches Climbed 2: ${data.matchesClimbedDouble}",
-                          ),
-                          Text(
-                            "Matches Climbed 3: ${data.matchesClimbedTriple}",
-                          ),
+                          // Text(
+                          //   "Can Harmony: ${data.canHarmony ?? "No Data"}",
+                          // ),
+                          // Text(
+                          //   "Matches Climbed 1: ${data.matchesClimbedSingle}",
+                          // ),
+                          // Text(
+                          //   "Matches Climbed 2: ${data.matchesClimbedDouble}",
+                          // ),
+                          // Text(
+                          //   "Matches Climbed 3: ${data.matchesClimbedTriple}",
+                          // ),
                           Text(
                             "Avg Trap Amount: ${data.avgData.trapAmount.toStringAsFixed(1)}",
                           ),
