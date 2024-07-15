@@ -12,8 +12,6 @@ import "package:scouting_frontend/models/team_model.dart";
 import "package:scouting_frontend/net/hasura_helper.dart";
 import "package:scouting_frontend/models/data/aggregate_data/aggregate_technical_data.dart";
 import "package:scouting_frontend/models/data/team_data/team_data.dart";
-import "package:scouting_frontend/models/data/specific_match_data.dart";
-import "package:scouting_frontend/models/data/specific_summary_data.dart";
 import "package:scouting_frontend/models/data/technical_match_data.dart";
 import "package:scouting_frontend/models/data/pit_data/pit_data.dart";
 import "package:scouting_frontend/views/mobile/screens/fault_view/fault_entry.dart";
@@ -192,16 +190,8 @@ Stream<SplayTreeSet<TeamData>> fetchMultipleTeamData(
                   )
                   .toList();
 
-          final List<SpecificMatchData> specificMatches =
-              (teamTable["specific_matches"] as List<dynamic>)
-                  .map(
-                    (final dynamic match) =>
-                        SpecificMatchData.parse(match, idProvider),
-                  )
-                  .toList();
           final dynamic pitTable = teamTable["pit"];
           final List<dynamic> faultTable = teamTable["faults"] as List<dynamic>;
-          final dynamic specificSummaryTable = teamTable["specific_summary"];
 
           return TeamData(
             aggregateData: AggregateData.fromTechnicalData(
@@ -218,7 +208,6 @@ Stream<SplayTreeSet<TeamData>> fetchMultipleTeamData(
                   ),
                 )
                 .toList(),
-            summaryData: SpecificSummaryData.parse(specificSummaryTable),
             lightTeam: team,
             firstPicklistIndex: firstPicklistIndex,
             secondPicklistIndex: secondPicklistIndex,
@@ -228,10 +217,6 @@ Stream<SplayTreeSet<TeamData>> fetchMultipleTeamData(
                   (final ScheduleMatch match) => MatchData(
                     technicalMatchData: technicalMatches.firstWhereOrNull(
                       (final TechnicalMatchData element) =>
-                          match.matchIdentifier == element.matchIdentifier,
-                    ),
-                    specificMatchData: specificMatches.firstWhereOrNull(
-                      (final SpecificMatchData element) =>
                           match.matchIdentifier == element.matchIdentifier,
                     ),
                     scheduleMatch: match,

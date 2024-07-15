@@ -5,11 +5,9 @@ import "package:scouting_frontend/models/data/team_data/team_data.dart";
 import "package:scouting_frontend/models/team_model.dart";
 import "package:scouting_frontend/net/hasura_helper.dart";
 import "package:scouting_frontend/views/constants.dart";
-import "package:scouting_frontend/views/pc/team_info/widgets/auto_data/auto_data_card.dart";
 import "package:scouting_frontend/views/pc/team_info/widgets/gamechart/gamechart_card.dart";
 import "package:scouting_frontend/views/pc/team_info/widgets/pit/pit_scouting.dart";
 import "package:scouting_frontend/views/pc/team_info/widgets/quick_data/quick_data_card.dart";
-import "package:scouting_frontend/views/pc/team_info/widgets/specific/specific_card.dart";
 
 class TeamInfoData extends StatelessWidget {
   TeamInfoData(this.team);
@@ -37,7 +35,7 @@ class TeamInfoData extends StatelessWidget {
                           const SizedBox(
                             width: defaultPadding,
                           ),
-                          Expanded(child: AutoDataCard(data: data.autoData)),
+                          // Expanded(child: AutoDataCard(data: data.autoData)),
                         ],
                       ),
                     ),
@@ -50,14 +48,6 @@ class TeamInfoData extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: defaultPadding),
-              Expanded(
-                flex: 2,
-                child: SpecificCard(
-                  team: data.lightTeam,
-                  matchData: data.matches,
-                  summaryData: data.summaryData,
-                ),
-              ),
               const SizedBox(
                 width: defaultPadding,
               ),

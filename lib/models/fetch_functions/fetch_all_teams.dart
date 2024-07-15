@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:graphql/client.dart";
 import "package:scouting_frontend/models/data/pit_data/pit_data.dart";
-import "package:scouting_frontend/models/data/specific_match_data.dart";
 import "package:scouting_frontend/models/data/technical_match_data.dart";
 import "package:scouting_frontend/models/providers/id_providers.dart";
 import "package:scouting_frontend/models/team_model.dart";
@@ -134,21 +133,11 @@ Stream<List<AllTeamData>> fetchAllTeams(final BuildContext context) =>
                           ),
                         )
                         .toList();
-                final List<SpecificMatchData> specificMatches =
-                    (team["specific_matches"] as List<dynamic>)
-                        .map(
-                          (final dynamic match) => SpecificMatchData.parse(
-                            match,
-                            idProvider,
-                          ),
-                        )
-                        .toList();
                 final List<dynamic> faultTable =
                     (team["faults"] as List<dynamic>);
                 final dynamic pitTable = team["pit"];
 
                 return AllTeamData(
-                  specificMatches: specificMatches,
                   team: LightTeam.fromJson(team),
                   firstPicklistIndex: (team["first_picklist_index"] as int),
                   secondPicklistIndex: (team["second_picklist_index"] as int),
