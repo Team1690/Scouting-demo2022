@@ -1,9 +1,11 @@
 import "package:scouting_frontend/models/providers/id_providers.dart";
 
 enum Climb implements IdEnum {
-  noAttempt("No Attempt", 0),
+  noAttempt("No attempt", 0),
   failed("Failed", 1),
-  climbed("Climbed", 2);
+  climbOne("First bar", 2),
+  climbTwo("Second bar", 3),
+  climbThree("Third bar", 4);
 
   const Climb(this.title, this.chartHeight);
 
