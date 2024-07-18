@@ -32,16 +32,16 @@ class NavigationTab extends StatelessWidget {
               title: "Pick List",
               widget: PickListScreen.new,
             ),
-            const NavbarTile(
-              icon: Icons.compare_arrows,
-              title: "Compare",
-              widget: CompareScreen.new,
-            ),
-            const NavbarTile(
-              icon: Icons.bar_chart_rounded,
-              title: "Scatter",
-              widget: ScatterScreen.new,
-            ),
+            // const NavbarTile(
+            //   icon: Icons.compare_arrows,
+            //   title: "Compare",
+            //   widget: CompareScreen.new,
+            // ),
+            // const NavbarTile(
+            //   icon: Icons.bar_chart_rounded,
+            //   title: "Scatter",
+            //   widget: ScatterScreen.new,
+            // ),
             const NavbarTile(
               icon: Icons.mobile_friendly,
               title: "Status",
@@ -52,11 +52,11 @@ class NavigationTab extends StatelessWidget {
               title: "Scouting Shifts",
               widget: ScoutingShiftsScreen.new,
             ),
-            const NavbarTile(
-              icon: Icons.list_alt,
-              title: "Team List",
-              widget: TeamList.new,
-            ),
+            // const NavbarTile(
+            //   icon: Icons.list_alt,
+            //   title: "Team List",
+            //   widget: TeamList.new,
+            // ),
             const NavbarTile(
               icon: Icons.add_circle_outline,
               title: "Matches",

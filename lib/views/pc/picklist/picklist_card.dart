@@ -119,27 +119,27 @@ class _PicklistCardState extends State<PicklistCard> {
               ),
               Row(
                 children: <Widget>[
-                  TextButton(
-                    onPressed: viewMode
-                        ? null
-                        : () async {
-                            final List<AllTeamData>? newAllTeamData =
-                                await showDialog<List<AllTeamData>>(
-                              context: context,
-                              builder: (final BuildContext context) =>
-                                  AutoPickListPopUp(
-                                currentPickList: currentPickList,
-                                teamsToSort: widget.initialData,
-                              ),
-                            );
-                            if (newAllTeamData != null) {
-                              setState(() {
-                                data = newAllTeamData;
-                              });
-                            }
-                          },
-                    child: const Text("Sort By"),
-                  ),
+                  // TextButton(
+                  //   onPressed: viewMode
+                  //       ? null
+                  //       : () async {
+                  //           final List<AllTeamData>? newAllTeamData =
+                  //               await showDialog<List<AllTeamData>>(
+                  //             context: context,
+                  //             builder: (final BuildContext context) =>
+                  //                 AutoPickListPopUp(
+                  //               currentPickList: currentPickList,
+                  //               teamsToSort: widget.initialData,
+                  //             ),
+                  //           );
+                  //           if (newAllTeamData != null) {
+                  //             setState(() {
+                  //               data = newAllTeamData;
+                  //             });
+                  //           }
+                  //         },
+                  //   child: const Text("Sort By"),
+                  // ),
                   TextButton(
                     onPressed: () async {
                       final bool? newViewMode = await showDialog<bool>(
