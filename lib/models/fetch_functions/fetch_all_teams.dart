@@ -11,107 +11,79 @@ import "package:scouting_frontend/models/data/all_team_data.dart";
 const String subscription = """
 subscription FetchAllTeams {
   team {
+    technical_matches(where: {ignored: {_eq: false}, is_rematch: {}, left_tarmac: {}, lower_hub_auto: {}, lower_hub_missed_auto: {}, lower_hub_missed_tele: {}, lower_hub_tele: {}, robot_field_status_id: {}, upper_hub_auto: {}, upper_hub_missed_auto: {}, upper_hub_missed_tele: {}, upper_hub_tele: {}}, order_by: [{schedule_match: {match_type: {order: asc}}}, {schedule_match: {match_number: asc}}, {is_rematch: asc}]) {
+      schedule_match {
+        id
+        match_type {
+          id
+        }
+        match_number
+        id
+      }
+      is_rematch
+      climb {
+        id
+        points
+        title
+      }
+      robot_field_status_id
+      scouter_name
+      id
+      lower_hub_tele
+      lower_hub_missed_tele
+      lower_hub_missed_auto
+      lower_hub_auto
+      left_tarmac
+    }
+    name
+    number
+    id
+    colors_index
+    first_picklist_index
+    second_picklist_index
+    third_picklist_index
+    faults {
+      is_rematch
+      message
+      fault_status {
+        id
+      }
+      schedule_match_id
+      schedule_match {
+        id
+        match_number
+        match_type {
+          id
+        }
+      }
+      id
+      team {
+        name
+        number
+        id
+        colors_index
+      }
+    }
     pit {
-      drivetrain {
-        id
-      }
-      drivemotor {
-        id
-      }
-      notes
+      drivemotor_id
+      drivetrain_id
+      weight
+      length
+      width
       url
+      can_climb_to_id
       team {
         faults {
           message
         }
-        id
-        number
-        colors_index
         name
-      }
-      weight
-      length
-      width
-      harmony
-      trap
-      can_pass_under_stage
-      can_eject
-      shooting_range_id
-      climb
-    }
-    id
-    name
-    number
-    first_picklist_index
-    second_picklist_index
-    third_picklist_index
-    colors_index
-    taken
-    faults {
-      message
-    }
-    technical_matches {
-      id
-      scouter_name
-      cilmb_id
-      harmony_with
-      is_rematch
-      schedule_match {
-        match_type {
-          id
-        }
-        match_number
+        number
         id
-      }
-      climb {
-        title
-        points
-        id
-      }
-      tele_amp
-      tele_amp_missed
-      tele_speaker
-      tele_speaker_missed
-      auto_amp
-      auto_amp_missed
-      auto_speaker
-      auto_speaker_missed
-      trap_amount
-      traps_missed
-      delivery
-      robot_field_status {
-        id
-      }
-      autonomous_options{
-        id
-      }
-    }
-    specific_matches {
-      id
-      amp_rating
-      climb_rating
-      defense_amount_id
-      defense_rating
-      driving_rating
-      general_rating
-      intake_rating
-      speaker_rating
-      scouter_name
-      team_id
-      is_rematch
-      schedule_match {
-        id
-        match_number
-        match_type {
-          id
-        }
+        colors_index
       }
     }
   }
 }
-
-
-
 
 """;
 
