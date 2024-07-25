@@ -56,13 +56,13 @@ class _TeamInfoScreenState extends State<TeamInfoScreen> {
                 ],
               ),
               const SizedBox(height: defaultPadding),
-              Expanded(
-                flex: 10,
-                child: chosenTeam.mapNullable(
-                      TeamInfoData.new,
-                    ) ??
-                    NoTeamSelected(),
-              ),
+              // Expanded(
+              //   flex: 10,
+              //   child: chosenTeam.mapNullable(
+              //         TeamInfoData.new,
+              //       ) ??
+              //       NoTeamSelected(),
+              // ),
             ],
           ),
         ),

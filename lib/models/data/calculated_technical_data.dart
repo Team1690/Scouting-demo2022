@@ -11,21 +11,9 @@ class CalculatedTechnicalData<T extends num> implements TechnicalData<T> {
   final List<TechnicalData<int>> technicalDatas;
 
   @override
-  T get ampGamepieces => calculateFieldAggregateData(
+  T get upperHubGamepieces => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.ampGamepieces,
-      );
-
-  @override
-  T get climbingPoints => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.climbingPoints,
-      );
-
-  @override
-  T get ampPoints => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.ampPoints,
+        (final TechnicalData<int> techdata) => techdata.upperHubGamepieces,
       );
 
   @override
@@ -35,123 +23,69 @@ class CalculatedTechnicalData<T extends num> implements TechnicalData<T> {
       );
 
   @override
+  T get autoLowerHubPoints => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.autoLowerHubPoints,
+      );
+
+  @override
   T get autoPoints => calculateFieldAggregateData(
         technicalDatas,
         (final TechnicalData<int> techdata) => techdata.autoPoints,
       );
 
   @override
-  T get autoSpeaker => calculateFieldAggregateData(
+  T get autoUpperHubPoints => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.autoSpeaker,
+        (final TechnicalData<int> techdata) => techdata.autoUpperHubPoints,
       );
 
   @override
-  T get autoSpeakerMissed => calculateFieldAggregateData(
+  T get climbId => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.autoSpeakerMissed,
+        (final TechnicalData<int> techdata) => techdata.climbId,
       );
 
   @override
-  T get autoSpeakerPoints => calculateFieldAggregateData(
+  T get leftTarmac => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.autoSpeakerPoints,
+        (final TechnicalData<int> techdata) => techdata.leftTarmac,
       );
 
   @override
-  T get gamePiecesPoints => calculateFieldAggregateData(
+  T get leftTarmacPoints => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.gamePiecesPoints,
+        (final TechnicalData<int> techdata) => techdata.leftTarmacPoints,
       );
 
   @override
-  T get gamepieces => calculateFieldAggregateData(
+  T get lowerHubAuto => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.gamepieces,
+        (final TechnicalData<int> techdata) => techdata.lowerHubAuto,
       );
 
   @override
-  T get speakerGamepieces => calculateFieldAggregateData(
+  T get lowerHubGamepieces => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.speakerGamepieces,
+        (final TechnicalData<int> techdata) => techdata.lowerHubGamepieces,
       );
 
   @override
-  T get speakerPoints => calculateFieldAggregateData(
+  T get lowerHubMissedAuto => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.speakerPoints,
+        (final TechnicalData<int> techdata) => techdata.lowerHubMissedAuto,
       );
 
   @override
-  T get teleAmp => calculateFieldAggregateData(
+  T get lowerHubMissedTele => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleAmp,
+        (final TechnicalData<int> techdata) => techdata.lowerHubMissedTele,
       );
 
   @override
-  T get teleAmpMissed => calculateFieldAggregateData(
+  T get lowerHubTele => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleAmpMissed,
-      );
-
-  @override
-  T get teleAmpPoints => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleAmpPoints,
-      );
-
-  @override
-  T get teleGamepieces => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleGamepieces,
-      );
-
-  @override
-  T get telePoints => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.telePoints,
-      );
-
-  @override
-  T get teleSpeaker => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleSpeaker,
-      );
-
-  @override
-  T get teleSpeakerMissed => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleSpeakerMissed,
-      );
-
-  @override
-  T get teleSpeakerPoints => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.teleSpeakerPoints,
-      );
-
-  @override
-  T get totalMissed => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.totalMissed,
-      );
-
-  @override
-  T get trapAmount => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.trapAmount,
-      );
-
-  @override
-  T get trapsMissed => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.trapsMissed,
-      );
-
-  @override
-  T get missedAmp => calculateFieldAggregateData(
-        technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.missedAmp,
+        (final TechnicalData<int> techdata) => techdata.lowerHubTele,
       );
 
   @override
@@ -161,9 +95,9 @@ class CalculatedTechnicalData<T extends num> implements TechnicalData<T> {
       );
 
   @override
-  T get missedSpeaker => calculateFieldAggregateData(
+  T get missedLowerHub => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techdata) => techdata.missedSpeaker,
+        (final TechnicalData<int> techdata) => techdata.missedLowerHub,
       );
 
   @override
@@ -173,21 +107,75 @@ class CalculatedTechnicalData<T extends num> implements TechnicalData<T> {
       );
 
   @override
-  T get delivery => calculateFieldAggregateData(
+  T get missedUpperHub => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techData) => techData.delivery,
+        (final TechnicalData<int> techdata) => techdata.missedUpperHub,
       );
 
   @override
-  T get gamepiecesWthDelivery => calculateFieldAggregateData(
+  T get teleGamepieces => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techData) => techData.gamepiecesWthDelivery,
+        (final TechnicalData<int> techdata) => techdata.teleGamepieces,
       );
 
   @override
-  T get cycleScore => calculateFieldAggregateData(
+  T get teleLowerHubPoints => calculateFieldAggregateData(
         technicalDatas,
-        (final TechnicalData<int> techData) => techData.cycleScore,
+        (final TechnicalData<int> techdata) => techdata.teleLowerHubPoints,
+      );
+
+  @override
+  T get telePoints => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.telePoints,
+      );
+
+  @override
+  T get teleUpperHubPoints => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.teleUpperHubPoints,
+      );
+
+  @override
+  T get totalGamepieces => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.totalGamepieces,
+      );
+
+  @override
+  T get totalMissed => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.totalMissed,
+      );
+
+  @override
+  T get totalPoints => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.totalPoints,
+      );
+
+  @override
+  T get upperHubAuto => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.upperHubAuto,
+      );
+
+  @override
+  T get upperHubMissedAuto => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.upperHubMissedAuto,
+      );
+
+  @override
+  T get upperHubMissedTele => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.upperHubMissedTele,
+      );
+
+  @override
+  T get upperHubTele => calculateFieldAggregateData(
+        technicalDatas,
+        (final TechnicalData<int> techdata) => techdata.upperHubTele,
       );
 
   T caclulateOnListOfField(

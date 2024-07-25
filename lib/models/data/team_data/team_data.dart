@@ -68,11 +68,11 @@ class TeamData {
 
   double get aim =>
       100 *
-      (aggregateData.avgData.gamepieces /
-              (aggregateData.avgData.gamepieces +
+      (aggregateData.avgData.totalGamepieces /
+              (aggregateData.avgData.totalGamepieces +
                   aggregateData.avgData.totalMissed))
           .clamp(double.minPositive, double.maxFinite);
 
-  double get trapSuccessRate =>
-      100 * aggregateData.sumData.trapAmount / aggregateData.gamesPlayed;
+  // double get trapSuccessRate =>
+  //     100 * aggregateData.sumData.trapAmount / aggregateData.gamesPlayed;
 }
