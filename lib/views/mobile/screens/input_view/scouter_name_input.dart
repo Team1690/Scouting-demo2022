@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:scouting_frontend/models/providers/scouter_provider.dart";
 import "package:scouting_frontend/views/mobile/screens/input_view/scouter_selection.dart";
 
 class ScouterNameInput extends StatelessWidget {
@@ -15,6 +14,6 @@ class ScouterNameInput extends StatelessWidget {
   Widget build(final BuildContext context) => ScouterSearchBox(
         typeAheadController: scouterNameController,
         onChanged: onScouterNameChange,
-        scouters: ScouterProvider.of(context).scouters,
+        scouters: const <String>[],
       );
 }
