@@ -62,8 +62,8 @@ class AllTeamData {
   double get aim => aggregateData.gamesPlayed == 0
       ? double.negativeInfinity
       : 100 *
-          (aggregateData.avgData.gamepieces /
-                  (aggregateData.avgData.gamepieces +
+          (aggregateData.avgData.totalGamepieces /
+                  (aggregateData.avgData.totalGamepieces +
                       aggregateData.avgData.totalMissed))
               .clamp(0, 1);
   @override

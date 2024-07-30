@@ -102,9 +102,6 @@ Future<InputViewVars> fetchTechnicalMatch(
       parserFn: (final Map<String, dynamic> data) {
         final dynamic technicalMatch = data["technical_match"][0];
         return InputViewVars.all(
-          autonomousOptions: IdProvider.of(context)
-              .autoOptions
-              .idToEnum[technicalMatch["autonomous_options"]["id"] as int]!,
           delivery: technicalMatch["delivery"] as int,
           trapsMissed: technicalMatch["traps_missed"] as int,
           isRematch: scheduleMatch.matchIdentifier.isRematch,

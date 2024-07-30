@@ -28,8 +28,7 @@ class InputViewVars implements HasuraVars {
         trapAmount = 0,
         trapsMissed = 0,
         scoutedTeam = null,
-        faultMessage = null,
-        autonomousOptions = null;
+        faultMessage = null;
   InputViewVars.all({
     required this.faultMessage,
     required this.delivery,
@@ -50,7 +49,6 @@ class InputViewVars implements HasuraVars {
     required this.harmonyWith,
     required this.trapAmount,
     required this.scoutedTeam,
-    required this.autonomousOptions,
   });
 
   InputViewVars cleared() =>
@@ -76,7 +74,6 @@ class InputViewVars implements HasuraVars {
     final LightTeam? Function()? scoutedTeam,
     final int Function()? delivery,
     final String? Function()? faultMessage,
-    final AutonomousOptions Function()? autonomousOptions,
   }) =>
       InputViewVars.all(
         faultMessage: faultMessage != null ? faultMessage() : this.faultMessage,
@@ -107,9 +104,6 @@ class InputViewVars implements HasuraVars {
         trapsMissed: trapsMissed != null ? trapsMissed() : this.trapsMissed,
         scoutedTeam: scoutedTeam != null ? scoutedTeam() : this.scoutedTeam,
         delivery: delivery != null ? delivery() : this.delivery,
-        autonomousOptions: autonomousOptions != null
-            ? autonomousOptions()
-            : this.autonomousOptions,
       );
 
   final int delivery;
@@ -131,7 +125,6 @@ class InputViewVars implements HasuraVars {
   final int trapsMissed;
   final LightTeam? scoutedTeam;
   final String? faultMessage;
-  final AutonomousOptions? autonomousOptions;
 
   @override
   Map<String, dynamic> toJson(final BuildContext context) => <String, dynamic>{
@@ -155,7 +148,5 @@ class InputViewVars implements HasuraVars {
         "trap_amount": trapAmount,
         "traps_missed": trapsMissed,
         "delivery": delivery,
-        "autonomous_options_id":
-            IdProvider.of(context).autoOptions.enumToId[autonomousOptions]!,
       };
 }

@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import "package:scouting_frontend/views/mobile/counter.dart";
 import "package:scouting_frontend/views/mobile/section_divider.dart";
-import "package:scouting_frontend/views/pc/picklist/auto_picklist_popup.dart";
+// import "package:scouting_frontend/views/pc/picklist/auto_picklist_popup.dart";
 
 class ValueSliders extends StatefulWidget {
-  const ValueSliders({required this.onButtonPress});
-  final Function(AutoPicklistResult) onButtonPress;
+  // const ValueSliders({required this.onButtonPress});
+  // final Function(AutoPicklistResult) onButtonPress;
 
   @override
   State<ValueSliders> createState() => _ValueSlidersState();
@@ -49,26 +49,26 @@ class _ValueSlidersState extends State<ValueSliders> {
           const SizedBox(
             height: 10,
           ),
-          RoundedIconButton(
-            color: Colors.green,
-            onPress: () => widget.onButtonPress(
-              (
-                climbFactor: climbFactor,
-                ampFactor: ampFactor,
-                speakerFactor: speakerFactor,
-                filterSwerve: filterSwerve,
-              ),
-            ),
-            onLongPress: () => widget.onButtonPress(
-              (
-                climbFactor: climbFactor,
-                ampFactor: ampFactor,
-                speakerFactor: speakerFactor,
-                filterSwerve: filterSwerve,
-              ),
-            ),
-            icon: Icons.calculate_outlined,
-          ),
+          // RoundedIconButton(
+          //   color: Colors.green,
+          //   onPress: () => widget.onButtonPress(
+          //     (
+          //       climbFactor: climbFactor,
+          //       ampFactor: ampFactor,
+          //       speakerFactor: speakerFactor,
+          //       filterSwerve: filterSwerve,
+          //     ),
+          //   ),
+          //   onLongPress: () => widget.onButtonPress(
+          //     (
+          //       climbFactor: climbFactor,
+          //       ampFactor: ampFactor,
+          //       speakerFactor: speakerFactor,
+          //       filterSwerve: filterSwerve,
+          //     ),
+          //   ),
+          //   icon: Icons.calculate_outlined,
+          // ),
         ],
       );
 }

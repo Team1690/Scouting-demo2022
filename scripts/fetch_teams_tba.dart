@@ -91,7 +91,7 @@ Future<QueryResult<void>> sendTeams(
 
 GraphQLClient getClient(final DotEnv env) {
   final HttpLink link = HttpLink(
-    "https://orbitscouting2024.hasura.app/v1/graphql",
+    "https://scouting-app-2022.hasura.app/v1/graphql",
     defaultHeaders: <String, String>{
       "x-hasura-admin-secret": env["HASURA_ADMIN_SECRET"]!,
     },

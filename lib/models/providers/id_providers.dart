@@ -31,11 +31,13 @@ abstract class IdEnum {
 Map<T, int> nameToIdToEnumToId<T extends IdEnum>(
   final List<T> values,
   final Map<String, int> nameToId,
-) =>
-    <T, int>{
-      for (final T e in values)
-        e: nameToId[e.title] ?? (throw Exception("Enum: ${e.title} not found")),
-    };
+) {
+  for (final T e in values) {}
+  return <T, int>{
+    for (final T e in values)
+      e: nameToId[e.title] ?? (throw Exception("Enum: ${e.title} not found")),
+  };
+}
 
 class IdProvider extends InheritedWidget {
   IdProvider({
@@ -46,8 +48,6 @@ class IdProvider extends InheritedWidget {
     required final Map<MatchType, int> matchTypeIds,
     required final Map<RobotFieldStatus, int> robotFieldStatusIds,
     required final Map<FaultStatus, int> faultStatus,
-    required final Map<ShootingRange, int> shootingRange,
-    required final Map<AutonomousOptions, int> autoOptions,
   }) : this._inner(
           child: child,
           climb: IdTable<Climb>(climbIds),
@@ -56,8 +56,6 @@ class IdProvider extends InheritedWidget {
           matchType: IdTable<MatchType>(matchTypeIds),
           robotFieldStatus: IdTable<RobotFieldStatus>(robotFieldStatusIds),
           faultStatus: IdTable<FaultStatus>(faultStatus),
-          shootingRange: IdTable<ShootingRange>(shootingRange),
-          autoOptions: IdTable<AutonomousOptions>(autoOptions),
         );
 
   IdProvider._inner({
@@ -68,8 +66,6 @@ class IdProvider extends InheritedWidget {
     required this.matchType,
     required this.robotFieldStatus,
     required this.faultStatus,
-    required this.shootingRange,
-    required this.autoOptions,
   });
   final IdTable<RobotFieldStatus> robotFieldStatus;
   final IdTable<MatchType> matchType;
@@ -77,8 +73,6 @@ class IdProvider extends InheritedWidget {
   final IdTable<DriveTrain> driveTrain;
   final IdTable<DriveMotor> drivemotor;
   final IdTable<FaultStatus> faultStatus;
-  final IdTable<ShootingRange> shootingRange;
-  final IdTable<AutonomousOptions> autoOptions;
 
   @override
   bool updateShouldNotify(final IdProvider oldWidget) =>
@@ -87,9 +81,7 @@ class IdProvider extends InheritedWidget {
       matchType != oldWidget.matchType ||
       driveTrain != oldWidget.driveTrain ||
       drivemotor != oldWidget.drivemotor ||
-      faultStatus != oldWidget.faultStatus ||
-      shootingRange != oldWidget.shootingRange ||
-      autoOptions != oldWidget.autoOptions;
+      faultStatus != oldWidget.faultStatus;
 
   static IdProvider of(final BuildContext context) {
     final IdProvider? result =

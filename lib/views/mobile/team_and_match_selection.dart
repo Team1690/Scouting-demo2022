@@ -33,10 +33,7 @@ class TeamAndMatchSelectionState extends State<TeamAndMatchSelection> {
 
   @override
   Widget build(final BuildContext context) {
-    final List<ScoutingShift> shifts = ShiftProvider.of(context)
-        .shifts
-        .where((final ScoutingShift element) => element.name == widget.scouter)
-        .toList();
+    final List<ScoutingShift> shifts = [];
 
     return Column(
       children: <Widget>[

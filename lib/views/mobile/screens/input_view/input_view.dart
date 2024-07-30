@@ -209,14 +209,14 @@ class _UserInputState extends State<UserInput> {
                         },
                         matchMode: MatchMode.auto,
                       ),
-                      AutonomousSelector(
-                        match: match,
-                        onNewMatch: (final InputViewVars p0) {
-                          setState(() {
-                            match = p0;
-                          });
-                        },
-                      ),
+                      // AutonomousSelector(
+                      //   match: match,
+                      //   onNewMatch: (final InputViewVars p0) {
+                      //     setState(() {
+                      //       match = p0;
+                      //     });
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 15,
                       ),
