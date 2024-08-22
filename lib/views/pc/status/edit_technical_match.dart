@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:graphql/client.dart";
+import "package:scouting_frontend/models/match_identifier.dart";
 import "package:scouting_frontend/models/providers/id_providers.dart";
 import "package:scouting_frontend/views/mobile/screens/input_view/input_view_vars.dart";
 import "package:scouting_frontend/models/schedule_match.dart";
@@ -53,38 +54,31 @@ const String query = """
 query FetchTechnicalMatch(\$team_id: Int!, \$match_type_id: Int!, \$match_number: Int!, \$is_rematch: Boolean!) {
   technical_match(where: {schedule_match: {match_type: {id: {_eq: \$match_type_id}}, match_number: {_eq: \$match_number}}, is_rematch: {_eq: \$is_rematch}, team_id: {_eq: \$team_id}}) {
     schedule_match {
-        id
-        match_type {
-          id
-        }
-        match_number
-        happened
-      }
-      is_rematch
-      tele_amp
-      tele_amp_missed
-      tele_speaker
-      tele_speaker_missed
-      auto_amp
-      auto_amp_missed
-      auto_speaker
-      auto_speaker_missed
-      trap_amount
-      traps_missed
-      delivery
-      climb {
-        id
-        points
-        title
-      }
-      robot_field_status {
+      id
+      match_type {
         id
       }
-      autonomous_options {
-        id
-      }
-      harmony_with
-      scouter_name
+      match_number
+      happened
+    }
+    is_rematch
+    climb {
+      id
+      points
+      title
+    }
+    robot_field_status {
+      id
+    }
+    scouter_name
+    left_tarmac
+    lower_hub_auto
+    lower_hub_missed_auto
+    lower_hub_missed_tele
+    lower_hub_tele
+  }
+}
+
   }
 }
 
@@ -102,29 +96,26 @@ Future<InputViewVars> fetchTechnicalMatch(
       parserFn: (final Map<String, dynamic> data) {
         final dynamic technicalMatch = data["technical_match"][0];
         return InputViewVars.all(
-          delivery: technicalMatch["delivery"] as int,
-          trapsMissed: technicalMatch["traps_missed"] as int,
           isRematch: scheduleMatch.matchIdentifier.isRematch,
           scheduleMatch: scheduleMatch,
           scouterName: technicalMatch["scouter_name"] as String,
           robotFieldStatus: IdProvider.of(context)
               .robotFieldStatus
               .idToEnum[technicalMatch["robot_field_status"]["id"] as int]!,
-          teleAmp: technicalMatch["tele_amp"] as int,
-          teleAmpMissed: technicalMatch["tele_amp_missed"] as int,
-          teleSpeaker: technicalMatch["tele_speaker"] as int,
-          teleSpeakerMissed: technicalMatch["tele_speaker_missed"] as int,
-          autoAmp: technicalMatch["auto_amp"] as int,
-          autoAmpMissed: technicalMatch["auto_amp_missed"] as int,
-          autoSpeaker: technicalMatch["auto_speaker"] as int,
-          autoSpeakerMissed: technicalMatch["auto_speaker_missed"] as int,
           climb: IdProvider.of(context)
               .climb
               .idToEnum[technicalMatch["climb"]["id"] as int],
-          harmonyWith: technicalMatch["harmony_with"] as int,
-          trapAmount: technicalMatch["trap_amount"] as int,
           scoutedTeam: teamForQuery,
           faultMessage: "",
+          leftTarmac: technicalMatch["left_tarmac"] as bool,
+          lowerHubAuto: technicalMatch["lower_hub_auto"] as int,
+          lowerHubMissedAuto: technicalMatch["lower_hub_missed_auto"] as int,
+          lowerHubMissedTele: technicalMatch["lower_hub_missed_tele"] as int,
+          lowerHubTele: technicalMatch["lower_hub_tele"] as int,
+          upperHubAuto: technicalMatch["upper_hub_auto"] as int,
+          upperHubMissedAuto: technicalMatch["upper_hub_missed_auto"] as int,
+          upperHubMissedTele: technicalMatch["upper_hub_missed_tele"] as int,
+          upperHubTele: technicalMatch["upper_hub_tele"] as int,
         );
       },
       document: gql(query),

@@ -14,41 +14,36 @@ class InputViewVars implements HasuraVars {
         scheduleMatch = null,
         scouterName = "",
         robotFieldStatus = RobotFieldStatus.worked,
-        delivery = 0,
-        teleAmp = 0,
-        teleAmpMissed = 0,
-        teleSpeaker = 0,
-        teleSpeakerMissed = 0,
-        autoAmp = 0,
-        autoAmpMissed = 0,
-        autoSpeaker = 0,
-        autoSpeakerMissed = 0,
+        upperHubTele = 0,
+        lowerHubTele = 0,
+        upperHubAuto = 0,
+        lowerHubAuto = 0,
+        upperHubMissedTele = 0,
+        lowerHubMissedTele = 0,
+        upperHubMissedAuto = 0,
+        lowerHubMissedAuto = 0,
+        leftTarmac = false,
         climb = null,
-        harmonyWith = 0,
-        trapAmount = 0,
-        trapsMissed = 0,
         scoutedTeam = null,
         faultMessage = null;
+
   InputViewVars.all({
     required this.faultMessage,
-    required this.delivery,
-    required this.trapsMissed,
     required this.isRematch,
     required this.scheduleMatch,
     required this.scouterName,
     required this.robotFieldStatus,
-    required this.teleAmp,
-    required this.teleAmpMissed,
-    required this.teleSpeaker,
-    required this.teleSpeakerMissed,
-    required this.autoAmp,
-    required this.autoAmpMissed,
-    required this.autoSpeaker,
-    required this.autoSpeakerMissed,
     required this.climb,
-    required this.harmonyWith,
-    required this.trapAmount,
     required this.scoutedTeam,
+    required this.upperHubTele,
+    required this.lowerHubTele,
+    required this.upperHubAuto,
+    required this.lowerHubAuto,
+    required this.upperHubMissedTele,
+    required this.lowerHubMissedTele,
+    required this.upperHubMissedAuto,
+    required this.lowerHubMissedAuto,
+    required this.leftTarmac,
   });
 
   InputViewVars cleared() =>
@@ -59,20 +54,17 @@ class InputViewVars implements HasuraVars {
     final ScheduleMatch? Function()? scheduleMatch,
     final String? Function()? scouterName,
     final RobotFieldStatus Function()? robotFieldStatus,
-    final int Function()? teleAmp,
-    final int Function()? teleAmpMissed,
-    final int Function()? teleSpeaker,
-    final int Function()? teleSpeakerMissed,
-    final int Function()? autoAmp,
-    final int Function()? autoAmpMissed,
-    final int Function()? autoSpeaker,
-    final int Function()? autoSpeakerMissed,
     final Climb Function()? climb,
-    final int Function()? harmonyWith,
-    final int Function()? trapAmount,
-    final int Function()? trapsMissed,
+    final int Function()? upperHubAuto,
+    final int Function()? lowerHubAuto,
+    final int Function()? upperHubTele,
+    final int Function()? lowerHubTele,
+    final int Function()? upperHubMissedAuto,
+    final int Function()? lowerHubMissedAuto,
+    final int Function()? upperHubMissedTele,
+    final int Function()? lowerHubMissedTele,
+    final bool Function()? leftTarmac,
     final LightTeam? Function()? scoutedTeam,
-    final int Function()? delivery,
     final String? Function()? faultMessage,
   }) =>
       InputViewVars.all(
@@ -84,45 +76,41 @@ class InputViewVars implements HasuraVars {
         robotFieldStatus: robotFieldStatus != null
             ? robotFieldStatus()
             : this.robotFieldStatus,
-        teleAmp: teleAmp != null ? teleAmp() : this.teleAmp,
-        teleAmpMissed:
-            teleAmpMissed != null ? teleAmpMissed() : this.teleAmpMissed,
-        teleSpeaker: teleSpeaker != null ? teleSpeaker() : this.teleSpeaker,
-        teleSpeakerMissed: teleSpeakerMissed != null
-            ? teleSpeakerMissed()
-            : this.teleSpeakerMissed,
-        autoAmp: autoAmp != null ? autoAmp() : this.autoAmp,
-        autoAmpMissed:
-            autoAmpMissed != null ? autoAmpMissed() : this.autoAmpMissed,
-        autoSpeaker: autoSpeaker != null ? autoSpeaker() : this.autoSpeaker,
-        autoSpeakerMissed: autoSpeakerMissed != null
-            ? autoSpeakerMissed()
-            : this.autoSpeakerMissed,
         climb: climb != null ? climb() : this.climb,
-        harmonyWith: harmonyWith != null ? harmonyWith() : this.harmonyWith,
-        trapAmount: trapAmount != null ? trapAmount() : this.trapAmount,
-        trapsMissed: trapsMissed != null ? trapsMissed() : this.trapsMissed,
+        upperHubAuto: upperHubAuto != null ? upperHubAuto() : this.upperHubAuto,
+        lowerHubAuto: lowerHubAuto != null ? lowerHubAuto() : this.lowerHubAuto,
+        upperHubTele: upperHubTele != null ? upperHubTele() : this.upperHubTele,
+        lowerHubTele: lowerHubTele != null ? lowerHubTele() : this.lowerHubTele,
+        upperHubMissedAuto: upperHubMissedAuto != null
+            ? upperHubMissedAuto()
+            : this.upperHubMissedAuto,
+        lowerHubMissedAuto: lowerHubMissedAuto != null
+            ? lowerHubMissedAuto()
+            : this.lowerHubMissedAuto,
+        upperHubMissedTele: upperHubMissedTele != null
+            ? upperHubMissedTele()
+            : this.upperHubMissedTele,
+        lowerHubMissedTele: lowerHubMissedTele != null
+            ? lowerHubMissedTele()
+            : this.lowerHubMissedTele,
+        leftTarmac: leftTarmac != null ? leftTarmac() : this.leftTarmac,
         scoutedTeam: scoutedTeam != null ? scoutedTeam() : this.scoutedTeam,
-        delivery: delivery != null ? delivery() : this.delivery,
       );
 
-  final int delivery;
   final bool isRematch;
   final ScheduleMatch? scheduleMatch;
   final String? scouterName;
   final RobotFieldStatus robotFieldStatus;
-  final int teleAmp;
-  final int teleAmpMissed;
-  final int teleSpeaker;
-  final int teleSpeakerMissed;
-  final int autoAmp;
-  final int autoAmpMissed;
-  final int autoSpeaker;
-  final int autoSpeakerMissed;
   final Climb? climb;
-  final int harmonyWith;
-  final int trapAmount;
-  final int trapsMissed;
+  final int upperHubTele;
+  final int lowerHubTele;
+  final int upperHubAuto;
+  final int lowerHubAuto;
+  final int upperHubMissedTele;
+  final int lowerHubMissedTele;
+  final int upperHubMissedAuto;
+  final int lowerHubMissedAuto;
+  final bool leftTarmac;
   final LightTeam? scoutedTeam;
   final String? faultMessage;
 
@@ -135,18 +123,15 @@ class InputViewVars implements HasuraVars {
         "robot_field_status_id":
             IdProvider.of(context).robotFieldStatus.enumToId[robotFieldStatus]!,
         "is_rematch": isRematch,
-        "tele_amp": teleAmp,
-        "tele_amp_missed": teleAmpMissed,
-        "tele_speaker": teleSpeaker,
-        "tele_speaker_missed": teleSpeakerMissed,
-        "auto_amp": autoAmp,
-        "auto_amp_missed": autoAmpMissed,
-        "auto_speaker": autoSpeaker,
-        "auto_speaker_missed": autoSpeakerMissed,
         "climb_id": IdProvider.of(context).climb.enumToId[climb]!,
-        "harmony_with": harmonyWith,
-        "trap_amount": trapAmount,
-        "traps_missed": trapsMissed,
-        "delivery": delivery,
+        "upper_hub_auto": upperHubAuto,
+        "lower_hub_auto": lowerHubAuto,
+        "upper_hub_tele": upperHubTele,
+        "lower_hub_tele": lowerHubTele,
+        "upper_hub_missed_auto": upperHubMissedAuto,
+        "lower_hub_missed_auto": lowerHubMissedAuto,
+        "upper_hub_missed_tele": upperHubMissedTele,
+        "lower_hub_missed_tele": lowerHubMissedTele,
+        "left_tarmac": leftTarmac,
       };
 }
