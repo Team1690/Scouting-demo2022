@@ -209,38 +209,10 @@ class _UserInputState extends State<UserInput> {
                         },
                         matchMode: MatchMode.auto,
                       ),
-                      // AutonomousSelector(
-                      //   match: match,
-                      //   onNewMatch: (final InputViewVars p0) {
-                      //     setState(() {
-                      //       match = p0;
-                      //     });
-                      //   },
-                      // ),
                       const SizedBox(
                         height: 15,
                       ),
                       SectionDivider(label: "Teleoperated"),
-                      Row(
-                        children: <Widget>[
-                          const VerticalDivider(),
-                          Expanded(
-                            child: Counter(
-                              label: "Brought to wing",
-                              icon: Icons.near_me_outlined,
-                              onChange: (final int delivery) {
-                                setState(() {
-                                  flickerScreen(delivery, match.delivery);
-                                  match = match.copyWith(
-                                    delivery: always(delivery),
-                                  );
-                                });
-                              },
-                              count: match.delivery,
-                            ),
-                          ),
-                        ],
-                      ),
                       MatchModeGamePieceCounter(
                         flickerScreen: flickerScreen,
                         match: match,
@@ -258,38 +230,6 @@ class _UserInputState extends State<UserInput> {
                             match = newMatch;
                           });
                         },
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Expanded(
-                            child: TrapAmount(
-                              onTrapChange: (final int trap) {
-                                setState(() {
-                                  match = match.copyWith(
-                                    trapAmount: always(trap),
-                                  );
-                                });
-                              },
-                              match: match,
-                              flickerScreen: flickerScreen,
-                            ),
-                          ),
-                          const VerticalDivider(),
-                          Expanded(
-                            child: TrapsMissed(
-                              onTrapChange: (final int trap) {
-                                setState(() {
-                                  match = match.copyWith(
-                                    trapsMissed: always(trap),
-                                  );
-                                });
-                              },
-                              flickerScreen: flickerScreen,
-                              match: match,
-                            ),
-                          ),
-                        ],
                       ),
                       const SizedBox(
                         height: 20,
@@ -440,12 +380,12 @@ class _UserInputState extends State<UserInput> {
       );
 
   String insertMutation(final bool hasFault) => """
-mutation MyMutation(\$climb_id: Int!, \$tele_amp: Int!, \$tele_amp_missed: Int!, \$tele_speaker: Int!, \$tele_speaker_missed: Int!, \$auto_amp: Int!, \$auto_amp_missed: Int!, \$auto_speaker: Int!, \$auto_speaker_missed: Int!, \$trap_amount: Int!, \$traps_missed: Int!, \$harmony_with: Int!, \$is_rematch: Boolean!, \$robot_field_status_id: Int, \$schedule_id: Int!, \$team_id: Int!, \$scouter_name: String!, \$delivery: Int!, \$fault_message: String, \$autonomous_options_id: Int!) {
-  insert_technical_match(objects: {cilmb_id: \$climb_id, tele_amp: \$tele_amp, tele_amp_missed: \$tele_amp_missed, tele_speaker: \$tele_speaker, tele_speaker_missed: \$tele_speaker_missed, auto_amp: \$auto_amp, auto_amp_missed: \$auto_amp_missed, auto_speaker: \$auto_speaker, auto_speaker_missed: \$auto_speaker_missed, trap_amount: \$trap_amount, traps_missed: \$traps_missed, harmony_with: \$harmony_with, is_rematch: \$is_rematch, robot_field_status_id: \$robot_field_status_id, schedule_id: \$schedule_id, team_id: \$team_id, scouter_name: \$scouter_name, delivery: \$delivery, autonomous_options_id: \$autonomous_options_id}) {
+mutation MyMutation(\$climb_id: Int!, \$is_rematch: Boolean!, \$robot_field_status_id: Int, \$schedule_id: Int!, \$team_id: Int!, \$scouter_name: String!, \$left_tarmac: Boolean = false, \$lower_hub_auto: Int = "", \$lower_hub_missed_auto: Int = 10, \$lower_hub_missed_tele: Int = 10, \$lower_hub_tele: Int = 10, \$upper_hub_auto: Int = 10, \$upper_hub_missed_auto: Int = 10, \$upper_hub_missed_tele: Int = 10, \$upper_hub_tele: Int = 10) {
+  insert_technical_match(objects: {climb_id: \$climb_id, is_rematch: \$is_rematch, robot_field_status_id: \$robot_field_status_id, schedule_id: \$schedule_id, team_id: \$team_id, scouter_name: \$scouter_name, left_tarmac: \$left_tarmac, lower_hub_auto: \$lower_hub_auto, lower_hub_missed_auto: \$lower_hub_missed_auto, lower_hub_missed_tele: \$lower_hub_missed_tele, lower_hub_tele: \$lower_hub_tele, upper_hub_auto: \$upper_hub_auto, upper_hub_missed_auto: \$upper_hub_missed_auto, upper_hub_missed_tele: \$upper_hub_missed_tele, upper_hub_tele: \$upper_hub_tele}) {
     affected_rows
   }
   ${!hasFault ? "" : """
-insert_faults(objects: {team_id: \$team_id, message: \$fault_message, schedule_match_id: \$schedule_id fault_status_id: 1 is_rematch: \$is_rematch}) {
+insert_faults(objects: {team_id: \$team_id, schedule_match_id: \$schedule_id, fault_status_id: 1, is_rematch: \$is_rematch, message: \$fault_message}) {
     affected_rows
   }
   """}
@@ -454,10 +394,11 @@ insert_faults(objects: {team_id: \$team_id, message: \$fault_message, schedule_m
 """;
 
   String updateMutation = """
-mutation MyMutation(\$climb_id: Int!, \$tele_amp: Int!, \$tele_amp_missed: Int!, \$tele_speaker: Int!, \$tele_speaker_missed: Int!, \$auto_amp: Int!, \$auto_amp_missed: Int!, \$auto_speaker: Int!, \$auto_speaker_missed: Int!, \$trap_amount: Int!, \$traps_missed: Int!, \$harmony_with: Int!, \$is_rematch: Boolean!, \$robot_field_status_id: Int, \$schedule_id: Int!, \$team_id: Int!, \$scouter_name: String!, \$delivery: Int!, \$autonomous_options_id: Int!) {
-  update_technical_match(where: {team_id: {_eq: \$team_id}, schedule_id: {_eq: \$schedule_id}, is_rematch: {_eq: \$is_rematch}} _set: {cilmb_id: \$climb_id, tele_amp: \$tele_amp, tele_amp_missed: \$tele_amp_missed, tele_speaker: \$tele_speaker, tele_speaker_missed: \$tele_speaker_missed, auto_amp: \$auto_amp, auto_amp_missed: \$auto_amp_missed, auto_speaker: \$auto_speaker, auto_speaker_missed: \$auto_speaker_missed, trap_amount: \$trap_amount, traps_missed: \$traps_missed, harmony_with: \$harmony_with, is_rematch: \$is_rematch, robot_field_status_id: \$robot_field_status_id, schedule_id: \$schedule_id, team_id: \$team_id, scouter_name: \$scouter_name, delivery: \$delivery, autonomous_options_id: \$autonomous_options_id}) {
+mutation MyMutation(\$climb_id: Int!, \$is_rematch: Boolean!, \$robot_field_status_id: Int!, \$schedule_id: Int!, \$team_id: Int!, \$scouter_name: String!, \$left_tarmac: Boolean!, \$lower_hub_auto: Int!, \$lower_hub_missed_auto: Int!, \$lower_hub_missed_tele: Int!, \$lower_hub_tele: Int!, \$upper_hub_tele: Int!, \$upper_hub_missed_tele: Int!, \$upper_hub_missed_auto: Int!, \$upper_hub_auto: Int!) {
+  update_technical_match(where: {team_id: {_eq: \$team_id}, schedule_id: {_eq: \$schedule_id}, is_rematch: {_eq: \$is_rematch}}, _set: {climb_id: \$climb_id, is_rematch: \$is_rematch, robot_field_status_id: \$robot_field_status_id, schedule_id: \$schedule_id, team_id: \$team_id, scouter_name: \$scouter_name, left_tarmac: \$left_tarmac, lower_hub_auto: \$lower_hub_auto, lower_hub_missed_auto: \$lower_hub_missed_auto, lower_hub_missed_tele: \$lower_hub_missed_tele, lower_hub_tele: \$lower_hub_tele, upper_hub_auto: \$upper_hub_auto, upper_hub_missed_tele: \$upper_hub_missed_tele, upper_hub_tele: \$upper_hub_tele, upper_hub_missed_auto: \$upper_hub_missed_auto}) {
     affected_rows
   }
-  }
+}
+
 """;
 }

@@ -11,9 +11,20 @@ class ScouterNameInput extends StatelessWidget {
   final TextEditingController scouterNameController;
 
   @override
-  Widget build(final BuildContext context) => ScouterSearchBox(
-        typeAheadController: scouterNameController,
-        onChanged: onScouterNameChange,
-        scouters: const <String>[],
-      );
+  Widget build(final BuildContext context) =>
+      Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+                child: TextField(
+              controller: scouterNameController,
+              decoration: const InputDecoration(
+                hintText: "Enter Scouter Name",
+              ),
+              onChanged: onScouterNameChange,
+            ))
+          ],
+        ),
+      ]);
 }

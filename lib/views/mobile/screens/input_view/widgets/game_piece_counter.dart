@@ -6,28 +6,30 @@ import "package:scouting_frontend/views/mobile/screens/input_view/input_view_var
 
 class GamePieceCounter extends StatelessWidget {
   const GamePieceCounter({
+    //TODO see if merging upper and lower hub change function is possible
     super.key,
-    required this.amp,
-    required this.ampMissed,
-    required this.speaker,
-    required this.speakerMissed,
-    required this.onAmpChange,
-    required this.onAmpMissedChange,
-    required this.onSpeakerChange,
-    required this.onSpeakerMissedChange,
+    required this.lowerHub,
+    required this.lowerHubMissed,
+    required this.upperHub,
+    required this.upperHubMissed,
+    required this.onLowerHubChange,
+    required this.onLowerHubMissedChange,
+    required this.onUpperHubChange,
+    required this.onUpperHubMissedChange,
     required this.flickerScreen,
   });
 
-  final int amp;
-  final int ampMissed;
-  final int speaker;
-  final int speakerMissed;
+  final int lowerHub;
+  final int lowerHubMissed;
+  final int upperHub;
+  final int upperHubMissed;
 
-  final void Function(int amp) onAmpChange;
-  final void Function(int ampMissed) onAmpMissedChange;
-  final void Function(int speaker) onSpeakerChange;
-  final void Function(int speakerMissed) onSpeakerMissedChange;
+  final void Function(int lowerHub) onLowerHubChange;
+  final void Function(int upperHub) onUpperHubChange;
+  final void Function(int lowerHubMissed) onLowerHubMissedChange;
+  final void Function(int upperHubMissed) onUpperHubMissedChange;
   final void Function(int newValue, int oldValue) flickerScreen;
+
   @override
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,25 +39,25 @@ class GamePieceCounter extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Counter(
-                  label: "Scored Amp",
-                  icon: Icons.speaker,
-                  onChange: (final int amp) {
-                    flickerScreen(amp, this.amp);
-                    onAmpChange(amp);
+                  label: "Scored Lower Hub",
+                  icon: Icons.hub,
+                  onChange: (final int lowerHub) {
+                    flickerScreen(lowerHub, this.lowerHub);
+                    onLowerHubChange(lowerHub);
                   },
-                  count: amp,
+                  count: lowerHub,
                 ),
               ),
               const VerticalDivider(),
               Expanded(
                 child: Counter(
-                  label: "Scored Speaker",
-                  icon: Icons.speaker,
-                  onChange: (final int speaker) {
-                    flickerScreen(speaker, this.speaker);
-                    onSpeakerChange(speaker);
+                  label: "Scored Upper Hub",
+                  icon: Icons.hub,
+                  onChange: (final int upperHub) {
+                    flickerScreen(upperHub, this.upperHub);
+                    onUpperHubChange(upperHub);
                   },
-                  count: speaker,
+                  count: upperHub,
                 ),
               ),
             ],
@@ -65,25 +67,25 @@ class GamePieceCounter extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Counter(
-                  label: "Missed Amp",
+                  label: "Missed Lower Hub",
                   icon: Icons.cancel,
-                  onChange: (final int ampMissed) {
-                    flickerScreen(ampMissed, this.ampMissed);
-                    onAmpMissedChange(ampMissed);
+                  onChange: (final int lowerHubMissed) {
+                    flickerScreen(lowerHubMissed, this.lowerHubMissed);
+                    onLowerHubMissedChange(lowerHubMissed);
                   },
-                  count: ampMissed,
+                  count: lowerHubMissed,
                 ),
               ),
               const VerticalDivider(),
               Expanded(
                 child: Counter(
-                  label: "Missed Speaker",
+                  label: "Missed Upper Hub",
                   icon: Icons.cancel,
-                  onChange: (final int speakerMissed) {
-                    flickerScreen(speakerMissed, this.speakerMissed);
-                    onSpeakerMissedChange(speakerMissed);
+                  onChange: (final int upperHubMissed) {
+                    flickerScreen(upperHubMissed, this.upperHubMissed);
+                    onUpperHubMissedChange(upperHubMissed);
                   },
-                  count: speakerMissed,
+                  count: upperHubMissed,
                 ),
               ),
             ],
@@ -115,37 +117,38 @@ class MatchModeGamePieceCounter extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => GamePieceCounter(
         flickerScreen: flickerScreen,
-        amp: modeValue(match.autoAmp, match.teleAmp),
-        ampMissed: modeValue(match.autoAmpMissed, match.teleAmpMissed),
-        speaker: modeValue(match.autoSpeaker, match.teleSpeaker),
-        speakerMissed:
-            modeValue(match.autoSpeakerMissed, match.teleSpeakerMissed),
-        onAmpChange: (final int amp) {
+        lowerHub: modeValue(match.lowerHubAuto, match.lowerHubTele),
+        lowerHubMissed:
+            modeValue(match.lowerHubMissedAuto, match.lowerHubMissedTele),
+        upperHub: modeValue(match.upperHubAuto, match.upperHubTele),
+        upperHubMissed:
+            modeValue(match.upperHubMissedAuto, match.upperHubMissedTele),
+        onLowerHubChange: (final int lowerHub) {
           onNewMatch(
             matchMode == m.MatchMode.tele
-                ? match.copyWith(teleAmp: always(amp))
-                : match.copyWith(autoAmp: always(amp)),
+                ? match.copyWith(lowerHubTele: always(lowerHub))
+                : match.copyWith(lowerHubAuto: always(lowerHub)),
           );
         },
-        onAmpMissedChange: (final int ampMissed) {
+        onUpperHubChange: (final int upperHub) {
           onNewMatch(
             matchMode == m.MatchMode.tele
-                ? match.copyWith(teleAmpMissed: always(ampMissed))
-                : match.copyWith(autoAmpMissed: always(ampMissed)),
+                ? match.copyWith(upperHubTele: always(upperHub))
+                : match.copyWith(upperHubAuto: always(upperHub)),
           );
         },
-        onSpeakerChange: (final int speaker) {
+        onLowerHubMissedChange: (final int lowerHubMissed) {
           onNewMatch(
             matchMode == m.MatchMode.tele
-                ? match.copyWith(teleSpeaker: always(speaker))
-                : match.copyWith(autoSpeaker: always(speaker)),
+                ? match.copyWith(lowerHubMissedTele: always(lowerHubMissed))
+                : match.copyWith(lowerHubMissedAuto: always(lowerHubMissed)),
           );
         },
-        onSpeakerMissedChange: (final int speakerMissed) {
+        onUpperHubMissedChange: (final int upperHubMissed) {
           onNewMatch(
             matchMode == m.MatchMode.tele
-                ? match.copyWith(teleSpeakerMissed: always(speakerMissed))
-                : match.copyWith(autoSpeakerMissed: always(speakerMissed)),
+                ? match.copyWith(upperHubMissedTele: always(upperHubMissed))
+                : match.copyWith(upperHubMissedAuto: always(upperHubMissed)),
           );
         },
       );
